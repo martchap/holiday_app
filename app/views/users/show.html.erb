@@ -1,0 +1,36 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="span3">
+    <section>
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+</div>
+<div class="span8">
+    <% if @user.holidays.any? %>
+      <h3>Holidays (<%= @user.holidays.count %>)</h3>
+      <ol class="holidays">
+        <% @holidays.each do |holiday| -%>
+          <li><%=holiday.start_date%> - <%=holiday.end_date%> - <%=holiday.work_days%> Days Leave</li>
+          <%= link_to 'Cancel Holiday', holiday_path(holiday),
+            :confirm => 'Are you sure?', :method => :delete %>
+            <%= link_to 'Edit Holiday', edit_holiday_path(holiday) %>
+        <% end -%>
+      </ol>
+      <%= will_paginate @holidays %>
+
+      <h3>Total number of holidays this year</h3>
+      <%=@user.total_holidays%> / <%=@user.holiday_allowance%>
+    <% end %>
+
+    <br>
+    <br>
+    
+
+    <%= link_to "Book Holiday!", new_holiday_path, class: "btn btn-large btn-primary" %>
+    </div>
+  </div>
+</div>

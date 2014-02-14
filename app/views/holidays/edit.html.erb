@@ -1,0 +1,8 @@
+<%= form_for [@holiday] do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.date_field :start_date, :placeholder => 'dd/mm/yyyy', class: 'datepicker' %>
+    <%= f.date_field :end_date, :placeholder => 'dd/mm/yyyy', class: 'datepicker' %>
+  </div>
+  <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+<% end %>
