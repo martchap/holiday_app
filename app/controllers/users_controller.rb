@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @holidays = @user.holidays.paginate(page: params[:page])
+    @employee_holiday = Holiday.joins(:user).where('line_manager' == current_user.email)
   end
 
   # GET /users/new

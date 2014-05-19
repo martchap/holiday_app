@@ -18,6 +18,7 @@
           <%= link_to 'Cancel Holiday', holiday_path(holiday),
             :confirm => 'Are you sure?', :method => :delete %>
             <%= link_to 'Edit Holiday', edit_holiday_path(holiday) %>
+            <%=accepted_icon_for_holidays(holiday)%>
         <% end -%>
       </ol>
       <%= will_paginate @holidays %>
@@ -33,4 +34,34 @@
     <%= link_to "Book Holiday!", new_holiday_path, class: "btn btn-large btn-primary" %>
     </div>
   </div>
+</div>
+<br><br>
+<div >
+  <h3>Employee Holidays</h3>
+  <%if current_user.admin? %>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Employee</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Accept</th>
+          </tr>
+        </thead>
+        <% @employee_holiday.each do |holiday|%>
+          <tbody>
+            <tr>
+              <td><%=holiday.user.name%></td>
+              <td><%=holiday.start_date%></td>
+              <td><%=holiday.end_date%></td>
+              <% if holiday.accepted? %>
+                <td><%=button_to "Decline", decline_holiday_path(holiday), {class: "btn btn-danger", form: {style: 'margin:0px;'} } %><td>
+              <%else%>
+                <td><%=button_to "Accept", accept_holiday_path(holiday), {class: "btn btn-primary", form: {style: 'margin:0px;'} } %><td>
+              <%end%>
+            </tr>
+          </tbody>
+        <%end%>
+      </table>
+  <%end%>
 </div>

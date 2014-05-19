@@ -30,4 +30,13 @@ class Holiday < ActiveRecord::Base
 		return unless start_date > end_date
 		errors.add(:base, "Start date cannot be later than the End date")
 	end
+
+	def accept!
+      self.accepted = true
+      save
+    end
+    def decline!
+      self.accepted = false
+      save
+    end
 end

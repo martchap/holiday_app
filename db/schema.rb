@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140214115158) do
+ActiveRecord::Schema.define(version: 20140504154658) do
 
   create_table "holidays", force: true do |t|
     t.integer  "user_id"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20140214115158) do
     t.string   "remember_token"
     t.boolean  "admin",           default: false
     t.integer  "hours_per_week"
-    t.integer  "line_manager"
+    t.string   "line_manager"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

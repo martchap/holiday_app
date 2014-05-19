@@ -64,6 +64,18 @@ class HolidaysController < ApplicationController
     redirect_to current_user
   end
 
+  def accept
+    holiday = Holiday.find(params[:id])
+    holiday.accept!
+    redirect_to user_path(current_user)
+  end
+
+  def decline
+    holiday = Holiday.find(params[:id])
+    holiday.decline!
+    redirect_to user_path(current_user)
+  end
+
   private
 
     def holiday_params

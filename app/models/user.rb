@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :holidays
+  has_many :holiday
 
 	STANDARD_WEEK_HOURS = 40.0
 
@@ -13,10 +13,10 @@ class User < ActiveRecord::Base
 	before_create :create_remember_token
 	validates :name, presence: true, length: { maximum: 50}
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-    validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, 
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, 
                       uniqueness: { case_sensitive: false }
-    has_secure_password
-    validates :password, length: { minimum: 6 }, unless: Proc.new { |u| u.password.blank? }
+  has_secure_password
+  validates :password, length: { minimum: 6 }, unless: Proc.new { |u| u.password.blank? }
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64
@@ -64,6 +64,11 @@ class User < ActiveRecord::Base
 
   def start_month
     start_date.month.to_i
+  end
+  private
+
+  def create_remember_token
+    self.remember_token = SecureRandom.urlsafe_base64
   end
 end
 

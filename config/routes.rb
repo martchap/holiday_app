@@ -1,7 +1,10 @@
 HolidayApp::Application.routes.draw do
   root  'sessions#new'
 
-  resources :holidays
+  resources :holidays do
+    post 'accept', on: :member
+    post 'decline', on: :member
+  end
 
   resources :sessions
 
